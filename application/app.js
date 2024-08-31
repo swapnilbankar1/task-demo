@@ -2,7 +2,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const path = require("path");
-const connection = require('../application/config/database');
+require('./db/create_database');
+const taskRoutes = require('./routes/tasks');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -25,7 +26,6 @@ app.get('/', (req, res) => {
     res.send('Hello, World!');
 });
 
-// app.use("/api/posts", postRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/tasks", taskRoutes);
 
 module.exports = app;

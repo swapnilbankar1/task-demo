@@ -1,0 +1,11 @@
+<div class="main-container">
+  <mat-form-field class="example-form-field">
+    <mat-label>Task Name</mat-label>
+    <input matInput type="text" [(ngModel)]="taskName">
+  </mat-form-field>
+  <mat-form-field class="example-form-field">
+    <mat-label>Task Details</mat-label>
+    <input matInput type="text" [(ngModel)]="taskDetails">
+  </mat-form-field>
+  <button mat-button color="primary" (click)="createTask()" >Create Task</button>
+</div>

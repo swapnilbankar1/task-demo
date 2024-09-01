@@ -1,0 +1,15 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 20px;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.example-form-field {
+    width: 500px;
+}

@@ -26,4 +26,13 @@ export class AppComponent {
 
     });
   }
+
+  getTasks() {
+    this.appService.getTasks().subscribe(resp => {
+      console.log(resp);
+    }, error => {
+      console.log(error);
+
+    });
+  }
 }

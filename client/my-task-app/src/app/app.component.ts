@@ -11,6 +11,8 @@ export class AppComponent {
   taskName = '';
   taskDetails = '';
 
+  taskList = [];
+
   constructor(private appService: AppService) {
 
   }

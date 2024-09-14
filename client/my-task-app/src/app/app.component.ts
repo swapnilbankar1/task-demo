@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AppService } from './app.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
 
   taskList = [];
 
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private toastr: ToastrService) {
 
   }
 
@@ -36,5 +37,9 @@ export class AppComponent {
       console.log(error);
 
     });
+  }
+
+  listenSocket() {
+    
   }
 }

@@ -1,20 +1,30 @@
 const express = require("express");
 const crypto = require('crypto');
 const db = require('../db/create_database');
-
-const uuid = crypto.randomUUID();
+const taskUtils = require('../utils/task.util');
+const { broadcastMessage } = require('../utils/messageSender');
 
 exports.createTask = (req, res, next) => {
     const taskInfo = {
         name: req.body.name,
-        status: req.body.name,
-        details: req.body.name,
+        status: 'RUNNING',
+        details: req.body.details
     };
     const stmt = db.prepare('INSERT INTO task (id, name, status, start_time, details) VALUES (?,?,?,?,?)');
+    const uuid = crypto.randomUUID();
+    stmt.run(uuid, taskInfo.name, taskInfo.status, Date.now(), taskInfo.details);
 
-    stmt.run(crypto.randomUUID(), taskInfo.name, taskInfo.status, Date.now(), taskInfo.details);
+    res.status(201).json({ 'message': 'Task created' });
 
-    res.status(201).json({ 'message': 'Task created' })
+    setTimeout(() => {
+        const taskInfo = {
+            id: uuid,
+            status: 'SUCCESS',
+            details: 'Task completed successfully.'
+        };
+        taskUtils.updateTask(taskInfo);
+        broadcastMessage({ taskId: uuid, msg: 'Task completed successfully' });
+    }, 2000);
 }
 
 exports.getTasks = (req, res, next) => {

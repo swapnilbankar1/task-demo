@@ -2,7 +2,7 @@ const express = require("express");
 const crypto = require('crypto');
 const db = require('../db/create_database');
 const taskUtils = require('../utils/task.util');
-const { broadcastMessage } = require('../utils/messageSender');
+const Server = require('../server');
 
 exports.createTask = (req, res, next) => {
     const taskInfo = {
@@ -23,7 +23,7 @@ exports.createTask = (req, res, next) => {
             details: 'Task completed successfully.'
         };
         taskUtils.updateTask(taskInfo);
-        broadcastMessage({ taskId: uuid, msg: 'Task completed successfully' });
+        Server.broadcastMessage('Task completed successfully');
     }, 2000);
 }
 
@@ -38,3 +38,4 @@ exports.getTasks = (req, res, next) => {
         }
     });
 }
+

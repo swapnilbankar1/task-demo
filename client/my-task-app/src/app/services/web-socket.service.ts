@@ -9,7 +9,9 @@ export class WebSocketService {
     private socket$: WebSocketSubject<any>;
 
     constructor() {
-        this.socket$ = webSocket('ws://your-websocket-url');
+        this.socket$ = webSocket('ws://localhost:3000');
+        console.log(this.socket$);
+        
     }
 
     public sendMessage(msg: any): void {

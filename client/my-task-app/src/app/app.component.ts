@@ -41,8 +41,11 @@ export class AppComponent implements OnInit {
       console.log(resp);
     }, error => {
       console.log(error);
-
     });
+  }
+
+  removeTasks() {
+    
   }
 
   listenSocket() {

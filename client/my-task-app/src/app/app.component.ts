@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { ToastrService } from 'ngx-toastr';
 import { WebSocketService } from './services/web-socket.service';
@@ -15,9 +15,11 @@ export class AppComponent implements OnInit {
 
   taskList = [];
 
-  constructor(private appService: AppService, private toastr: ToastrService,
-    private socketService: WebSocketService) {
+  displayedColumns: string[] = ['name', 'status', 'details'];
+  dataSource: any = [];
 
+  constructor(private appService: AppService, private toastr: ToastrService,
+    private socketService: WebSocketService, private cd: ChangeDetectorRef) {
   }
 
   ngOnInit(): void {
@@ -37,15 +39,16 @@ export class AppComponent implements OnInit {
   }
 
   getTasks() {
-    this.appService.getTasks().subscribe(resp => {
+    this.appService.getTasks().subscribe((resp: any) => {
       console.log(resp);
+      this.dataSource = resp.tasks;
     }, error => {
       console.log(error);
     });
   }
 
   removeTasks() {
-    
+
   }
 
   listenSocket() {

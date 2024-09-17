@@ -9,7 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormsModule } from '@angular/forms';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -26,8 +27,9 @@ import { ToastrModule } from 'ngx-toastr';
 
     MatInputModule,
     MatFormFieldModule,
+    MatTableModule,
     MatButtonModule,
-    ToastrModule.forRoot(), 
+    ToastrModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

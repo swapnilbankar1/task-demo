@@ -11,7 +11,6 @@ export class WebSocketService {
     constructor() {
         this.socket$ = webSocket('ws://localhost:3000');
         console.log(this.socket$);
-        
     }
 
     public sendMessage(msg: any): void {

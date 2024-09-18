@@ -13,3 +13,6 @@
 .example-form-field {
     width: 500px;
 }
+.action-btns {
+    display: flex;
+}

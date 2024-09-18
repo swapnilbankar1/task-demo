@@ -7,9 +7,11 @@
     <mat-label>Task Details</mat-label>
     <input matInput type="text" [(ngModel)]="taskDetails">
   </mat-form-field>
-  <button mat-button color="primary" (click)="createTask()">Create Task</button>
-  <button mat-button color="primary" (click)="getTasks()">Get Tasks</button>
-  <button mat-button color="primary" (click)="removeTasks()">Remove Tasks</button>
+  <div class="action-btns">
+    <button mat-button color="primary" (click)="createTask()">Create Task</button>
+    <button mat-button color="secondary" (click)="getTasks()">Get Tasks</button>
+    <button mat-button color="primary" (click)="removeTasks()">Remove Tasks</button>
+  </div>
 </div>
 <br>
 

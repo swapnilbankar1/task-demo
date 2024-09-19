@@ -12,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { ToastrModule } from 'ngx-toastr';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ToastrModule } from 'ngx-toastr';
     MatFormFieldModule,
     MatTableModule,
     MatButtonModule,
-    ToastrModule.forRoot(),
+    MatIconModule,
+    MatToolbarModule,
+    ToastrModule.forRoot({ positionClass: 'toast-top-center', preventDuplicates: true }),
   ],
   providers: [],
   bootstrap: [AppComponent]

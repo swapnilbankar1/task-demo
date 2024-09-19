@@ -1,11 +1,11 @@
-// messageSender.js
-const wss = require('./websocket');
+// sendMessage.js
+const eventEmitter = require('./eventEmitter');  // Import the event emitter
 
+// Emit an event to broadcast a message to all WebSocket clients
 function broadcastMessage(message) {
-    wss.clients.forEach((client) => {
-        console.log(client);
-        client.send(message);
-    });
+    eventEmitter.emit('broadcast', message);
 }
 
-module.exports = { broadcastMessage };
+// Example usage
+// broadcastMessage('Hello from another file!');
+module.exports = broadcastMessage;

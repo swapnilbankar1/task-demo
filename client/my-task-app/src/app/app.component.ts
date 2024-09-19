@@ -26,6 +26,11 @@ export class AppComponent implements OnInit {
     this.listenSocket();
   }
 
+  clear() {
+    this.taskName = '';
+    this.taskDetails = '';
+  }
+
   createTask() {
     const payload = {
       name: this.taskName,
@@ -54,6 +59,17 @@ export class AppComponent implements OnInit {
   listenSocket() {
     this.socketService.getMessages().subscribe(resp => {
       console.log(resp);
+      this.handleNotification(resp);
     });
+  }
+
+  private handleNotification(resp: any) {
+    if (resp.status.toLowerCase() === 'success') {
+      this.toastr.success(resp.message);
+    } else if (resp.status.toLowerCase() === 'running') {
+      this.toastr.info(resp.message);
+    } else if (resp.status.toLowerCase() === 'error') {
+      this.toastr.error(resp.message);
+    }
   }
 }

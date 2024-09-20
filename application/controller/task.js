@@ -30,6 +30,56 @@ exports.createTask = (req, res, next) => {
     }, 4000);
 }
 
+// {
+//     "openapi": "3.0.0",
+//     "info": {
+//       "title": "Simple API",
+//       "description": "A simple API to demonstrate Swagger documentation",
+//       "version": "1.0.0"
+//     },
+//     "servers": [
+//       {
+//         "url": "http://localhost:3000",
+//         "description": "Local server"
+//       }
+//     ],
+//     "paths": {
+//       "/items": {
+//         "get": {
+//           "summary": "Retrieve a list of items",
+//           "description": "Returns a list of items",
+//           "responses": {
+//             "200": {
+//               "description": "A JSON array of items",
+//               "content": {
+//                 "application/json": {
+//                   "schema": {
+//                     "type": "array",
+//                     "items": {
+//                       "type": "object",
+//                       "properties": {
+//                         "id": {
+//                           "type": "integer",
+//                           "example": 1
+//                         },
+//                         "name": {
+//                           "type": "string",
+//                           "example": "Item name"
+//                         }
+//                       }
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//       }
+//     }
+//   }
+  
+
+
 exports.getTasks = (req, res, next) => {
 
     db.all('select * from task;', (err, rows) => {

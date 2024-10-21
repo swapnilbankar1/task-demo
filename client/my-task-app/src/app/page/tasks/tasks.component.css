@@ -1,0 +1,19 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.example-form-field {
+    width: 500px;
+}
+
+.action-btns {
+    display: flex;
+}

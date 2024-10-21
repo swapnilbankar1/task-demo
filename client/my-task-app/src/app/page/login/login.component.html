@@ -1,0 +1,35 @@
+<div class="main-container">
+    <div *ngIf="isEnableRegisterUser" class="">
+        <mat-form-field>
+            <mat-label>Enter Username </mat-label>
+            <input matInput type='text' />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Enter password</mat-label>
+            <input matInput type='password' />
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm password</mat-label>
+            <input matInput type='password' />
+        </mat-form-field>
+    </div>
+    <div *ngIf="!isEnableRegisterUser">
+        <mat-form-field>
+            <mat-label>Enter Username </mat-label>
+            <input matInput type='text' />
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Enter password</mat-label>
+            <input matInput type='password' />
+        </mat-form-field>
+    </div>
+
+
+    <div class="action-btns">
+        <button mat-flat-button color="primary"
+            (click)="enableRegisterUser()">Register User</button>
+        <button mat-button color="secondary" (click)="login()">Login</button>
+    </div>
+</div>

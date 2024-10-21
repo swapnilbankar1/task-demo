@@ -4,4 +4,10 @@ CREATE TABLE IF NOT EXISTS task (
     status VARCHAR(255) NOT NULL,
     start_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     end_time TIMESTAMP,
-    details VARCHAR(255));
+    details VARCHAR(255)
+);
+CREATE TABLE users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT,
+    password TEXT
+)

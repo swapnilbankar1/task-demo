@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 require('./db/create_database');
 const taskRoutes = require('./routes/tasks');
+const userRoutes = require('./routes/user');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -27,5 +28,6 @@ app.get('/', (req, res) => {
 });
 
 app.use("/api/tasks", taskRoutes);
+app.use("/api/user", userRoutes);
 
 module.exports = app;

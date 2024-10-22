@@ -17,3 +17,7 @@
 .action-btns {
     display: flex;
 }
+
+.form-field-width {
+    width: 400px;
+}

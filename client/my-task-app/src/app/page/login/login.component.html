@@ -1,35 +1,40 @@
 <div class="main-container">
-    <div *ngIf="isEnableRegisterUser" class="">
-        <mat-form-field>
+    <div *ngIf="isEnableRegisterUser" class="main-container">
+        <mat-form-field class="form-field-width">
             <mat-label>Enter Username </mat-label>
-            <input matInput type='text' />
+            <input [(ngModel)]="userName" matInput type='text' />
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="form-field-width">
             <mat-label>Enter password</mat-label>
-            <input matInput type='password' />
+            <input [(ngModel)]="password" matInput type='password' />
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="form-field-width">
             <mat-label>Confirm password</mat-label>
-            <input matInput type='password' />
+            <input [(ngModel)]="password" matInput type='password' />
         </mat-form-field>
     </div>
-    <div *ngIf="!isEnableRegisterUser">
-        <mat-form-field>
+    <div *ngIf="!isEnableRegisterUser" class="main-container">
+        <mat-form-field class="form-field-width">
             <mat-label>Enter Username </mat-label>
-            <input matInput type='text' />
+            <input [(ngModel)]="userName" matInput type='text' />
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field class="form-field-width">
             <mat-label>Enter password</mat-label>
-            <input matInput type='password' />
+            <input [(ngModel)]="password" matInput type='password' />
         </mat-form-field>
     </div>
 
 
     <div class="action-btns">
-        <button mat-flat-button color="primary"
-            (click)="enableRegisterUser()">Register User</button>
-        <button mat-button color="secondary" (click)="login()">Login</button>
+        <button mat-flat-button *ngIf="!isEnableRegisterUser" color="primary" (click)="login()">Login</button>
+        <button mat-flat-button *ngIf="isEnableRegisterUser" color="primary" (click)="registerUser()">Register
+            User</button>
+        <button mat-button color="secondary" *ngIf="!isEnableRegisterUser" (click)="enableRegisterUser()">Not
+            registered? Register here</button>
+        <button mat-button color="secondary" *ngIf="isEnableRegisterUser"
+            (click)="this.isEnableRegisterUser = !this.isEnableRegisterUser;">Back to login</button>
+        <button mat-button color="secondary" *ngIf="isEnableRegisterUser" (click)="clear()">Clear</button>
     </div>
 </div>

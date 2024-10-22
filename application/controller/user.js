@@ -1,5 +1,7 @@
 const db = require('../db/create_database');
-const taskUtils = require('../utils/task.util');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const cors = require('cors');
 
 exports.registerUser = (req, res, next) => {
     const { username, password } = req.body;

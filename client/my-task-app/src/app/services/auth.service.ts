@@ -9,11 +9,11 @@ export class AuthService {
     constructor(private http: HttpClient, private cookieService: CookieService) { }
 
     register(username: string, password: string) {
-        return this.http.post('http://localhost:3000/register', { username, password });
+        return this.http.post('http://localhost:3000/api/user/register-user', { username, password });
     }
 
     login(username: string, password: string) {
-        return this.http.post('http://localhost:3000/login', { username, password }, { withCredentials: true });
+        return this.http.post('http://localhost:3000/api/user/login', { username, password }, { withCredentials: true });
     }
 
     isLoggedIn() {

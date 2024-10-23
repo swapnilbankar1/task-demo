@@ -13,10 +13,11 @@ export class AuthService {
     }
 
     login(username: string, password: string) {
-        return this.http.post('http://localhost:3000/api/user/login', { username, password }, { withCredentials: true });
+        return this.http.post('http://localhost:3000/api/user/login', { username, password });
     }
 
     isLoggedIn() {
         return !!this.cookieService.get('token');
     }
+
 }

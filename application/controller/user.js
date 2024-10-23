@@ -13,6 +13,24 @@ exports.registerUser = (req, res, next) => {
     res.status(201).json({ 'message': 'User created' });
 }
 
+
+exports.login = (req, res, next) => {
+    try {
+        const { username, password } = req.body;
+        console.log(username, password);
+        db.get(`SELECT * FROM users WHERE username = ?`, [username], (err, user) => {
+            if (err || !user || !bcrypt.compareSync(password, user.password)) {
+                return res.status(401).send('Invalid credentials');
+            }
+            const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
+            res.cookie('token', token, { httpOnly: true });
+            res.status(200).send({ 'msg': 'Login successful' });
+        });
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+}
+
 exports.getUsers = (req, res, next) => {
     db.all('select * from users;', (err, rows) => {
         if (err) {
@@ -24,17 +42,6 @@ exports.getUsers = (req, res, next) => {
     });
 }
 
-exports.login = (req, res, next) => {
-    const { username, password } = req.body;
-    db.get(`SELECT * FROM users WHERE username = ?`, [username], (err, user) => {
-        if (err || !user || !bcrypt.compareSync(password, user.password)) {
-            return res.status(401).send('Invalid credentials');
-        }
-        const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-        res.cookie('token', token, { httpOnly: true });
-        res.status(200).send('Login successful');
-    });
-}
 
 // Auth Middleware
 exports.verifyToken = (req, res, next) => {

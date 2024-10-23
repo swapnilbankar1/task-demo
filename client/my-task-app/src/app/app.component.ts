@@ -9,52 +9,13 @@ import { TaskService } from './services/task.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  taskName = '';
-  taskDetails = '';
-
-  taskList = [];
-
-  displayedColumns: string[] = ['name', 'status', 'details'];
-  dataSource: any = [];
-
   constructor(
     private toastr: ToastrService,
-    private taskService: TaskService,
-    private socketService: WebSocketService, private cd: ChangeDetectorRef) {
+    private socketService: WebSocketService) {
   }
 
   ngOnInit(): void {
     this.listenSocket();
-  }
-
-  clear() {
-    this.taskName = '';
-    this.taskDetails = '';
-  }
-
-  createTask() {
-    const payload = {
-      name: this.taskName,
-      details: this.taskDetails
-    }
-    this.taskService.createTask(payload).subscribe(resp => {
-      console.log(resp);
-    }, error => {
-
-    });
-  }
-
-  getTasks() {
-    this.taskService.getTasks().subscribe((resp: any) => {
-      console.log(resp);
-      this.dataSource = resp.tasks;
-    }, error => {
-      console.log(error);
-    });
-  }
-
-  removeTasks() {
-
   }
 
   listenSocket() {

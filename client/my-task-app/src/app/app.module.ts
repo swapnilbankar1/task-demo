@@ -19,12 +19,14 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { LoginComponent } from './page/login/login.component';
 import { TasksComponent } from './page/tasks/tasks.component';
 import { AppRoutingModule } from './app-routing.module';
+import { ProfileComponent } from './page/profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    TasksComponent
+    TasksComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

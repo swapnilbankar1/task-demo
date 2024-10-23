@@ -12,23 +12,16 @@ const db = new sqlite3.Database('tasks.db', (err) => {
 });
 
 const sqlFile = fs.readFileSync('./db/task.sql', 'utf8');
-
+console.log(sqlFile)
 // Create a new table in the database
-db.run(sqlFile, (err) => {
+db.run(sqlFile, (result, err) => {
+    console.log(result);
+    
     if (err) {
         console.error('Error creating table:', err.message);
     } else {
         console.log('Table "task" created or already exists.');
     }
-
-    // Close the database connection
-    // db.close((err) => {
-    //     if (err) {
-    //         console.error('Error closing database:', err.message);
-    //     } else {
-    //         console.log('Database connection closed.');
-    //     }
-    // });
 });
 
 module.exports = db;

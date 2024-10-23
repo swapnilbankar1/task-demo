@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../app/services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +12,17 @@ export class LoginComponent {
   password = '';
   isEnableRegisterUser: boolean = false;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private toastr: ToastrService,) {
 
   }
 
   login() {
-
+    this.authService.login(this.userName, this.password).subscribe(resp => {
+      console.log(resp);
+      this.toastr.success('Login success');
+    }, error => {
+      this.toastr.error('Failed to login.');
+    })
   }
 
   enableRegisterUser() {
@@ -25,9 +31,17 @@ export class LoginComponent {
 
   registerUser() {
     this.authService.register(this.userName, this.password).subscribe(resp => {
-
+      this.toastr.success('User created successfully');
     }, error => {
+      this.toastr.error('Failed to create user.');
+    })
+  }
 
+  getUserInformation() {
+    this.authService.register(this.userName, this.password).subscribe(resp => {
+      this.toastr.success('User created successfully');
+    }, error => {
+      this.toastr.error('Failed to create user.');
     })
   }
 

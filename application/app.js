@@ -1,11 +1,13 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const cors = require('cors');
 const path = require("path");
 require('./db/create_database');
 const taskRoutes = require('./routes/tasks');
 const userRoutes = require('./routes/user');
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false

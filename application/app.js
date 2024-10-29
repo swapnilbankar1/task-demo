@@ -7,7 +7,11 @@ require('./db/create_database');
 const taskRoutes = require('./routes/tasks');
 const userRoutes = require('./routes/user');
 
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:4200', // Update with your Angular app's URL
+    credentials: true
+};
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: false

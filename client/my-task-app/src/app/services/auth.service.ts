@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from './cookies.service';
 
 @Injectable({
     providedIn: 'root'
@@ -17,7 +17,13 @@ export class AuthService {
     }
 
     isLoggedIn() {
-        return !!this.cookieService.get('token');
+        const result = !!this.cookieService.getCookie('token');
+        console.log(result);
+        return result
+    }
+
+    logout() {
+        this.cookieService.eraseCookie('token');
     }
 
 }

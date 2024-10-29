@@ -23,8 +23,8 @@ exports.login = (req, res, next) => {
                 return res.status(401).send('Invalid credentials');
             }
             const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-            res.cookie('token', token, { httpOnly: true });
-            res.status(200).send({ 'msg': 'Login successful' });
+            // res.cookie('token', token, { httpOnly: true });
+            res.status(200).json({ token });
         });
     } catch (error) {
         res.status(500).send('Server error');

@@ -1,25 +1,33 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../../../app/services/auth.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+
+import { CookieService } from '../../services/cookies.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent {
   userName = '';
   password = '';
   isEnableRegisterUser: boolean = false;
 
-  constructor(private authService: AuthService, private toastr: ToastrService,) {
+  constructor(private authService: AuthService, private toastr: ToastrService,
+    private router: Router, private cookieService: CookieService) {
 
   }
 
   login() {
-    this.authService.login(this.userName, this.password).subscribe(resp => {
+    this.authService.login(this.userName, this.password).subscribe((resp: any) => {
       console.log(resp);
-      this.toastr.success('Login success');
+      this.cookieService.setCookie('token', resp.token, 1);
+      console.log(this.cookieService.getCookie('token'));
+      console.log(this.authService.isLoggedIn());
+      this.router.navigate(['/profile']);
     }, error => {
       this.toastr.error('Failed to login.');
     })

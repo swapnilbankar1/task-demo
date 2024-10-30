@@ -25,8 +25,6 @@ export class LoginComponent {
     this.authService.login(this.userName, this.password).subscribe((resp: any) => {
       console.log(resp);
       this.cookieService.setCookie('token', resp.token, 1);
-      console.log(this.cookieService.getCookie('token'));
-      console.log(this.authService.isLoggedIn());
       this.router.navigate(['/profile']);
     }, error => {
       this.toastr.error('Failed to login.');

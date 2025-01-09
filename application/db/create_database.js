@@ -16,7 +16,6 @@ console.log(sqlFile)
 // Create a new table in the database
 db.run(sqlFile, (result, err) => {
     console.log(result);
-    
     if (err) {
         console.error('Error creating table:', err.message);
     } else {

@@ -1,3 +1,9 @@
 <div>
     <button (click)="logout()">Logout</button>
+    <button *ngIf="!isMFAConfigured" (click)="configureMFA()">Configure MFA</button>
+
+    <div *ngIf="qrCode">
+        <img [src]="qrCode" alt="QR Code">
+    </div>
+    <button (click)="disableMFA()">un-configure MFA</button>
 </div>

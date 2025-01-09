@@ -9,10 +9,14 @@ import { ProfileService } from '../../services/profile.service';
   styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
+  userInfo: any = {};
+  otpauthURL: any;
+  qrCode: any;
+  backupCodes: any;
+  isMFAConfigured: boolean = false
 
   constructor(private authService: AuthService, private router: Router,
     private profileService: ProfileService) {
-
   }
 
   ngOnInit(): void {
@@ -24,10 +28,34 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  configureMFA() {
+    this.authService.enableTotp(this.userInfo.username).subscribe((data: any) => {
+      console.log(data);
+      if (data) {
+        this.otpauthURL = data.otpauthURL;
+        this.qrCode = data.qrCode;
+        this.backupCodes = data.backupCodes;
+        this.isMFAConfigured = true;
+      }
+    }, error => {
+      console.log(error);
+      this.isMFAConfigured = false;
+
+    })
+  }
+
+  disableMFA() {
+    this.authService.disableTotp(this.userInfo.username).subscribe(resp => {
+
+    }, error => {
+      console.log(error);
+    })
+  }
 
   getProfile() {
-    this.profileService.getProfile().subscribe(resp => {
+    this.profileService.getProfile().subscribe((resp: any) => {
       console.log(resp);
+      this.userInfo = resp.userInfo;
     })
   }
 }

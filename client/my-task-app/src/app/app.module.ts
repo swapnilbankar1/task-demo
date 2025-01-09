@@ -21,6 +21,7 @@ import { TasksComponent } from './page/tasks/tasks.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './page/profile/profile.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

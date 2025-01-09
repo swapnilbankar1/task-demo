@@ -6,5 +6,7 @@ router.post("/register-user", userController.registerUser);
 router.get("/get-user", userController.getUsers);
 router.post("/login", userController.login);
 router.get("/profile", userController.verifyToken, userController.getProfile);
+router.post("/totp/enable", userController.enableTotpConfig);
+router.post("/totp/disable", userController.disableTotpConfig);
 
 module.exports = router;

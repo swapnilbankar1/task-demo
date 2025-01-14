@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { ProfileService } from '../../services/profile.service';
+import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-profile',
@@ -16,7 +17,7 @@ export class ProfileComponent implements OnInit {
   isMFAConfigured: boolean = false
 
   constructor(private authService: AuthService, private router: Router,
-    private profileService: ProfileService) {
+    private profileService: ProfileService, private sharedService: SharedService) {
   }
 
   ngOnInit(): void {
@@ -56,6 +57,10 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().subscribe((resp: any) => {
       console.log(resp);
       this.userInfo = resp.userInfo;
+      console.log(this.userInfo.username);
+      localStorage.setItem('userName', this.userInfo.username)
+      
+      this.sharedService.userName = this.userInfo.username;
     })
   }
 }

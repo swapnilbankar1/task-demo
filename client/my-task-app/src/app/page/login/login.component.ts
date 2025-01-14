@@ -24,8 +24,12 @@ export class LoginComponent {
   login() {
     this.authService.login(this.userName, this.password).subscribe((resp: any) => {
       console.log(resp);
-      this.cookieService.setCookie('token', resp.token, 1);
-      this.router.navigate(['/profile']);
+      if (resp.isMFA) {
+        this.router.navigate(['/validateOTP'], { state: { username: this.userName, password: this.password } });
+      } else {
+        this.cookieService.setCookie('token', resp.token, 1);
+      }
+
     }, error => {
       this.toastr.error('Failed to login.');
     })

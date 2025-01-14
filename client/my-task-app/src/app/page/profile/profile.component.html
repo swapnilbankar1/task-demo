@@ -1,4 +1,7 @@
 <div>
+    <h2>
+        Welcome {{userInfo.username}}
+    </h2>
     <button (click)="logout()">Logout</button>
     <button *ngIf="!isMFAConfigured" (click)="configureMFA()">Configure MFA</button>
 

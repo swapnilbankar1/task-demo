@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatMenuModule } from '@angular/material/menu';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
@@ -20,6 +21,7 @@ import { LoginComponent } from './page/login/login.component';
 import { TasksComponent } from './page/tasks/tasks.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ProfileComponent } from './page/profile/profile.component';
+import { AuthOTPComponent } from './page/auth-otp/auth-otp.component';
 
 
 @NgModule({
@@ -27,7 +29,8 @@ import { ProfileComponent } from './page/profile/profile.component';
     AppComponent,
     LoginComponent,
     TasksComponent,
-    ProfileComponent
+    ProfileComponent,
+    AuthOTPComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { ProfileComponent } from './page/profile/profile.component';
     MatButtonModule,
     MatIconModule,
     MatToolbarModule,
+    MatMenuModule,
     AppRoutingModule,
     ToastrModule.forRoot({ positionClass: 'toast-top-center', preventDuplicates: true }),
   ],

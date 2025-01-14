@@ -26,16 +26,34 @@ exports.login = (req, res, next) => {
             if (err || !user || !bcrypt.compareSync(password, user.password)) {
                 return res.status(401).send('Invalid credentials');
             }
+
+            console.log(user);
+            isMFA = user.totpSecret ? true : false;
+            const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
+            // res.cookie('token', token, { httpOnly: true });
+            res.status(200).json({ token, userId: user.id, isMFA });
+        });
+    } catch (error) {
+        res.status(500).send('Server error');
+    }
+}
+
+exports.validateOTP = (req, res, next) => {
+    try {
+        const { username, otp } = req.body;
+        db.get(`SELECT * FROM users WHERE username = ?`, [username], (err, user) => {
+            console.log(otp)
             if (user.totpSecret) {
                 speakeasy.totp.verify({
                     secret: user.totpSecret,
                     encoding: 'base32',
-                    token: totpCode
+                    token: otp
                 }, (err, verified) => {
                     if (err) {
                         console.error(err.message);
                         return res.status(500).json({ message: 'Invalid TOTP code' });
                     }
+                    console.log(verified)
 
                     if (!verified) {
                         return res.status(401).json({ message: 'Invalid TOTP code' });
@@ -44,13 +62,8 @@ exports.login = (req, res, next) => {
                     const token = jwt.sign({ userId: user.id }, 'secret', { expiresIn: '1h' });
                     res.json({ token });
                 });
-            } else {
-                const token = jwt.sign({ userId: user.id }, 'secret', { expiresIn: '1h' });
-                res.json({ token });
             }
-            console.log(user)
             const token = jwt.sign({ id: user.id }, 'secret', { expiresIn: '1h' });
-            // res.cookie('token', token, { httpOnly: true });
             res.status(200).json({ token, userId: user.id });
         });
     } catch (error) {

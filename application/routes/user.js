@@ -8,5 +8,6 @@ router.post("/login", userController.login);
 router.get("/profile", userController.verifyToken, userController.getProfile);
 router.post("/totp/enable", userController.enableTotpConfig);
 router.post("/totp/disable", userController.disableTotpConfig);
+router.post("/totp/validate", userController.validateOTP);
 
 module.exports = router;

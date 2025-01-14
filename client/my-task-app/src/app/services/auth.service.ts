@@ -47,4 +47,8 @@ export class AuthService {
         return this.http.post<AuthResponse>(`${this.baseUrl}/login/backup`, credentials)
             .pipe(map(res => res.token));
     }
+
+    authTotp(username: string, otp: number): Observable<any> {
+        return this.http.post<any>(`${this.baseUrl}/totp/validate`, { username, otp });
+    }
 }

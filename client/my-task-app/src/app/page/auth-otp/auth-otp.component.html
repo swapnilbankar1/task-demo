@@ -1,0 +1,13 @@
+<div class="main-container">
+    <div class="main-container">
+        <mat-form-field class="form-field-width">
+            <mat-label>Enter OTP </mat-label>
+            <input [(ngModel)]="otp" matInput type='text' />
+        </mat-form-field>
+    </div>
+    <div class="action-btns">
+        <button mat-flat-button color="primary" (click)="authenticate()">Authenticate
+            User</button>
+        <button mat-flat-button color="secondary" (click)="cancel()">Cancel
+            </button>
+    </div>
